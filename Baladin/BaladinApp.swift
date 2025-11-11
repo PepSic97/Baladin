@@ -11,11 +11,17 @@ import CoreData
 @main
 struct BaladinApp: App {
     let persistenceController = PersistenceController.shared
-
+    
+    @StateObject var cartVM = CartViewModel()
+    @StateObject var favoritesVM = FavoriteViewModel()
+    @StateObject var ordersVM = OrderViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            SplashView()
+                .environmentObject(cartVM)
+                .environmentObject(favoritesVM)
+                .environmentObject(ordersVM)
         }
     }
 }
